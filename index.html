@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal e-Rapor SMPN 1 Manonjaya</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+    <!-- TOP HEADER / ANNOUNCEMENT BANNER -->
+    <div id="announcement-bar" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-inner relative transition-all duration-300">
+      <span id="announcement-text"><i class="fa-solid fa-bullhorn mr-2 animate-bounce"></i> Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!</span>
+    </div>
+
+    <!-- MAIN NAVIGATION -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 transition-all duration-200">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <!-- Decorative School Logo (SVG Emblem) -->
+          <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+            <i class="fa-solid fa-school text-xl"></i>
+          </div>
+          <div>
+            <h1 class="font-extrabold text-slate-900 tracking-tight text-sm md:text-base leading-tight">SMP NEGERI 1 MANONJAYA</h1>
+            <p class="text-[11px] md:text-xs text-slate-500 font-semibold tracking-wider uppercase">Portal Layanan Digital Guru</p>
+          </div>
+        </div>
+
+        <button onclick="openAdminModal()" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors duration-200 px-3 py-1.5 rounded-lg text-xs font-semibold">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Operator Panel</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- HERO & ACTION SECTION (LEFT SIDE) -->
+      <section class="lg:col-span-8 space-y-6">
+        <!-- Hero Card -->
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden shadow-2xl">
+          <!-- Decorative background elements -->
+          <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+          <div class="absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl -ml-20 -mb-20"></div>
+
+          <div class="relative z-10 space-y-4">
+            <span class="inline-flex items-center gap-1.5 bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+              Akses Guru Aktif
+            </span>
+            <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight leading-tight">Input Nilai Rapor Kini Lebih Mudah dari Rumah!</h2>
+            <p class="text-slate-300 text-sm md:text-base max-w-xl">Selamat datang Bapak/Ibu Guru hebat SMPN 1 Manonjaya. Silakan akses portal e-Rapor resmi Kurikulum Merdeka di bawah ini menggunakan tautan terowongan Ngrok aktif.</p>
+
+            <!-- Server Status Badge -->
+            <div class="pt-2 flex flex-wrap gap-4 items-center">
+              <div class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg text-xs" id="status-container">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" id="status-dot"></span>
+                </span>
+                <span class="font-bold text-emerald-400" id="status-label">SERVER ONLINE (NGROK AKTIF)</span>
+              </div>
+              <span class="text-xs text-slate-400 italic" id="last-updated">Diperbarui oleh Operator: Baru Saja</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RAPOR LINK ACCESS CARD -->
+        <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-3">
+              <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shadow-inner">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+              </div>
+              <div>
+                <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase mb-1"> Utama </span>
+                <h3 class="text-xl md:text-2xl font-extrabold text-slate-900">e-Rapor Kurikulum Merdeka</h3>
+                <p class="text-xs md:text-sm text-slate-500 mt-1">Pintu masuk resmi penilaian dan input nilai rapor seluruh kelas (VII, VIII, dan IX) SMPN 1 Manonjaya.</p>
+              </div>
+            </div>
+
+            <div class="w-full md:w-auto shrink-0 flex flex-col items-center md:items-end justify-center">
+              <a
+                id="link-merdeka"
+                href="#"
+                target="_blank"
+                class="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg shadow-blue-500/25 transition-all duration-200 text-sm md:text-base group"
+              >
+                <span>Buka Aplikasi e-Rapor</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+              </a>
+              <p class="text-[10px] text-center md:text-right text-slate-400 mt-3 max-w-xs truncate" id="text-link-merdeka">Link: Belum dikonfigurasi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- GUIDELINES SECTION -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+            <i class="fa-solid fa-circle-info text-blue-500"></i>
+            Petunjuk Penggunaan & Troubleshooting
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-slate-600">
+            <div class="space-y-2">
+              <div class="flex items-start gap-2">
+                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-bold shrink-0 mt-0.5">1</span>
+                <p><strong>Gunakan Akun Resmi:</strong> Login menggunakan Username (NIP/NUPTK/Nama) dan Password yang telah dibagikan oleh operator.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-bold shrink-0 mt-0.5">2</span>
+                <p><strong>Pilih Level User:</strong> Jangan lupa untuk memilih level user yang sesuai (Guru/Wali Kelas) sebelum menekan tombol masuk aplikasi.</p>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-start gap-2">
+                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-amber-100 text-amber-600 text-xs font-bold shrink-0 mt-0.5">!</span>
+                <p><strong>Masalah Link "Tunnel Expired":</strong> Jika muncul peringatan Ngrok kadaluarsa saat dibuka, hubungi operator untuk memperbarui terowongan Ngrok.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-amber-100 text-amber-600 text-xs font-bold shrink-0 mt-0.5">i</span>
+                <p><strong>Koneksi Lambat:</strong> Kecepatan akses bergantung pada server sekolah dan koneksi internet di rumah masing-masing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HELP & INFORMATION PANEL (RIGHT SIDE) -->
+      <aside class="lg:col-span-4 space-y-6">
+        <!-- Operator Profile -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm text-center">
+          <div class="relative inline-block mx-auto mb-4">
+            <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/25">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white" title="Online"></span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Helpdesk Dapodik & e-Rapor</h3>
+          <p class="text-xs text-blue-600 font-semibold mb-3">SMP Negeri 1 Manonjaya</p>
+          <p class="text-xs text-slate-500 leading-relaxed px-2">Bapak/Ibu mengalami kendala saat melakukan pengisian data nilai? Hubungi saya kapan saja melalui kontak di bawah ini.</p>
+
+          <hr class="border-slate-100 my-4" />
+
+          <!-- Contact Buttons -->
+          <div class="space-y-2">
+            <a
+              id="btn-whatsapp"
+              href="https://wa.me/628123456789"
+              target="_blank"
+              class="flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 text-xs w-full"
+            >
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Hubungi via WhatsApp</span>
+            </a>
+            <div class="bg-slate-50 rounded-xl p-3 text-left">
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Lokasi Posko Offline</p>
+              <p class="text-xs font-semibold text-slate-700" id="text-lokasi-offline">Ruang Lab OmTa</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Manuals Card -->
+        <div class="bg-gradient-to-br from-indigo-50 to-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
+          <h4 class="font-bold text-indigo-900 text-sm mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-down text-indigo-600"></i>
+            Buku Panduan Guru
+          </h4>
+          <p class="text-xs text-indigo-700/80 mb-4">Unduh panduan resmi dalam format PDF jika mengalami kebingungan mengenai pengisian nilai e-Rapor.</p>
+
+          <div class="space-y-2">
+            <a
+              id="link-panduan-rapor"
+              href="#"
+              target="_blank"
+              class="flex items-center justify-between p-3 bg-white rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-sm transition-all text-xs text-slate-700 font-medium group"
+            >
+              <span class="flex items-center gap-2">
+                <i class="fa-regular fa-file-pdf text-red-500 text-base"></i>
+                Panduan e-Rapor Kurikulum Merdeka
+              </span>
+              <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a
+              id="link-panduan-nilai"
+              href="#"
+              target="_blank"
+              class="flex items-center justify-between p-3 bg-white rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-sm transition-all text-xs text-slate-700 font-medium group"
+            >
+              <span class="flex items-center gap-2">
+                <i class="fa-regular fa-file-pdf text-red-500 text-base"></i>
+                Panduan Penilaian & Pembelajaran
+              </span>
+              <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-100 py-6 mt-12 text-center text-xs text-slate-400">
+      <div class="max-w-6xl mx-auto px-4 space-y-2">
+        <p>&copy; 2026 SMP Negeri 1 Manonjaya. All rights reserved.</p>
+        <p class="font-medium text-slate-500 flex items-center justify-center gap-1.5">
+          <span>Dikelola dengan penuh dedikasi oleh</span>
+          <span class="bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md font-bold text-[10px]">Operator Dapodik SMPN 1 Manonjaya</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- ==================== MODALS & PANEL SYSTEM ==================== -->
+
+    <!-- ADMIN CONFIGURATION MODAL (Operator Panel) -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="admin-modal-content">
+        <!-- Auth Screen (PIN Requirement) -->
+        <div id="auth-panel" class="p-6 space-y-4">
+          <div class="text-center space-y-2">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-lg">Verifikasi Operator</h3>
+            <p class="text-xs text-slate-500">Masukkan PIN Operator untuk memvalidasi akses panel konfigurasi.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">PIN Rahasia (Bawaan: 1234)</label>
+            <input
+              type="password"
+              id="pin-input"
+              placeholder="Masukkan PIN"
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-lg font-bold tracking-widest focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all"
+            />
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="closeAdminModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition-colors">Batal</button>
+            <button onclick="verifyPin()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Verifikasi</button>
+          </div>
+        </div>
+
+        <!-- Config Form Screen -->
+        <div id="config-panel" class="hidden">
+          <div class="bg-slate-950 p-6 text-white flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-sm">Dashboard Operator</h3>
+              <p class="text-[10px] text-slate-400">Atur link e-Rapor & Status Server</p>
+            </div>
+            <button onclick="logoutAdmin()" class="text-slate-400 hover:text-white transition-colors text-xs flex items-center gap-1"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+          </div>
+
+          <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+            <!-- Status Toggle -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Status Server Saat Ini</label>
+              <select id="cfg-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="online">ONLINE (Ngrok Aktif)</option>
+                <option value="maintenance">MAINTENANCE (Pemeliharaan)</option>
+                <option value="offline">OFFLINE (Server Mati)</option>
+              </select>
+            </div>
+
+            <!-- Merdeka URL -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Ngrok e-Rapor Merdeka</label>
+              <input type="url" id="cfg-link-merdeka" placeholder="https://xxxx-xx-xx-xx.ngrok-free.app" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- Lokasi Offline -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Lokasi Posko Offline</label>
+              <input type="text" id="cfg-lokasi" placeholder="Contoh: Ruang Lab OmTa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- PDF Panduan Rapor URL -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan e-Rapor</label>
+              <input
+                type="url"
+                id="cfg-panduan-rapor"
+                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            <!-- PDF Panduan Pembelajaran URL -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan Penilaian</label>
+              <input
+                type="url"
+                id="cfg-panduan-nilai"
+                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            <!-- Announcement Text -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Pengumuman / Berita Terkini</label>
+              <textarea id="cfg-announcement" rows="2" placeholder="Tulis pengumuman di sini..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+            </div>
+
+            <!-- WhatsApp Link -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Nomor WhatsApp Operator (Sertakan Kode Negara)</label>
+              <input type="text" id="cfg-whatsapp" placeholder="628123456789" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- Change PIN Option -->
+            <div class="border-t border-slate-100 pt-3">
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Ubah PIN Operator Baru</label>
+              <input type="password" id="cfg-new-pin" placeholder="Kosongkan jika tidak ingin diubah" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex gap-2 pt-2">
+              <button onclick="closeAdminModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition-colors">Batal</button>
+              <button onclick="saveConfigurations()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Simpan Perubahan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION MODAL (NO ALERT RULE) -->
+    <div id="toast-notif" class="fixed bottom-4 right-4 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+      <i class="fa-solid fa-circle-check text-emerald-400" id="toast-icon"></i>
+      <span class="text-xs font-semibold" id="toast-message">Konfigurasi berhasil diperbarui!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT CONTROLLER ==================== -->
+    <script>
+      // CONFIGURATION DEFAULT STATE
+      const DEFAULT_CONFIGS = {
+        status: "online",
+        linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app",
+        lokasi: "Ruang Lab OmTa",
+        linkPanduanRapor: "https://ditpsmp.kemdikbud.go.id/download/panduan-aplikasi-e-rapor-kurikulum-merdeka-bagi-guru-dan-wali-kelas/",
+        linkPanduanNilai: "https://kurikulum.kemdikbud.go.id/wp-content/uploads/2022/06/Panduan-Pembelajaran-dan-Asesmen.pdf",
+        announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!",
+        whatsapp: "6285223344556", // Ganti dengan nomor asli Anda
+        pin: "1234",
+        lastUpdated: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB",
+      };
+
+      // Initialize from localstorage or use defaults
+      let appConfigs = JSON.parse(localStorage.getItem("era_configs")) || DEFAULT_CONFIGS;
+
+      // Render Configuration to UI
+      function applyConfigurations() {
+        // 1. Update Link
+        const linkMerdekaBtn = document.getElementById("link-merdeka");
+        const textMerdekaBtn = document.getElementById("text-link-merdeka");
+
+        // Merdeka Link
+        if (appConfigs.linkMerdeka) {
+          linkMerdekaBtn.href = appConfigs.linkMerdeka;
+          textMerdekaBtn.innerText = "Link: " + appConfigs.linkMerdeka;
+          linkMerdekaBtn.classList.remove("opacity-50", "pointer-events-none");
+        } else {
+          linkMerdekaBtn.href = "#";
+          textMerdekaBtn.innerText = "Link belum diatur";
+          linkMerdekaBtn.classList.add("opacity-50", "pointer-events-none");
+        }
+
+        // 2. Update Status Server UI
+        const statusContainer = document.getElementById("status-container");
+        const statusDot = document.getElementById("status-dot");
+        const statusLabel = document.getElementById("status-label");
+
+        if (appConfigs.status === "online") {
+          statusContainer.className = "flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg text-xs";
+          statusDot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
+          statusLabel.innerText = "SERVER ONLINE (NGROK AKTIF)";
+          statusLabel.className = "font-bold text-emerald-600";
+        } else if (appConfigs.status === "maintenance") {
+          statusContainer.className = "flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-lg text-xs";
+          statusDot.className = "relative inline-flex rounded-full h-2 w-2 bg-amber-500";
+          statusLabel.innerText = "SEDANG PEMELIHARAAN / BACKUP";
+          statusLabel.className = "font-bold text-amber-600";
+        } else {
+          statusContainer.className = "flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 px-3 py-1.5 rounded-lg text-xs";
+          statusDot.className = "relative inline-flex rounded-full h-2 w-2 bg-rose-500";
+          statusLabel.innerText = "SERVER OFFLINE (TUTUP)";
+          statusLabel.className = "font-bold text-rose-600";
+        }
+
+        // 3. Update Announcement
+        document.getElementById("announcement-text").innerHTML = `<i class="fa-solid fa-bullhorn mr-2 animate-bounce"></i> ${appConfigs.announcement}`;
+
+        // 4. Update WhatsApp Contact & Location Info
+        document.getElementById("btn-whatsapp").href = `https://wa.me/${appConfigs.whatsapp}`;
+        document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
+
+        // 5. Update PDF Manual Links
+        document.getElementById("link-panduan-rapor").href = appConfigs.linkPanduanRapor || "#";
+        document.getElementById("link-panduan-nilai").href = appConfigs.linkPanduanNilai || "#";
+
+        // 6. Update Time Info
+        document.getElementById("last-updated").innerText = `Update terakhir oleh Operator: ${appConfigs.lastUpdated}`;
+      }
+
+      // CUSTOM TOAST NOTIFICATION
+      function showToast(message, isSuccess = true) {
+        const toast = document.getElementById("toast-notif");
+        const toastIcon = document.getElementById("toast-icon");
+        const toastMsg = document.getElementById("toast-message");
+
+        toastMsg.innerText = message;
+        if (isSuccess) {
+          toastIcon.className = "fa-solid fa-circle-check text-emerald-400";
+        } else {
+          toastIcon.className = "fa-solid fa-circle-xmark text-rose-500";
+        }
+
+        toast.classList.remove("translate-y-20", "opacity-0");
+        toast.classList.add("translate-y-0", "opacity-100");
+
+        setTimeout(() => {
+          toast.classList.remove("translate-y-0", "opacity-100");
+          toast.classList.add("translate-y-20", "opacity-0");
+        }, 3000);
+      }
+
+      // ADMIN MODAL FLOWS
+      function openAdminModal() {
+        const modal = document.getElementById("admin-modal");
+        const content = document.getElementById("admin-modal-content");
+
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          content.classList.remove("scale-95", "opacity-0");
+          content.classList.add("scale-100", "opacity-100");
+        }, 10);
+
+        // Set inputs to match current state
+        document.getElementById("cfg-status").value = appConfigs.status;
+        document.getElementById("cfg-link-merdeka").value = appConfigs.linkMerdeka;
+        document.getElementById("cfg-lokasi").value = appConfigs.lokasi || "Ruang Lab OmTa";
+        document.getElementById("cfg-panduan-rapor").value = appConfigs.linkPanduanRapor || "";
+        document.getElementById("cfg-panduan-nilai").value = appConfigs.linkPanduanNilai || "";
+        document.getElementById("cfg-announcement").value = appConfigs.announcement;
+        document.getElementById("cfg-whatsapp").value = appConfigs.whatsapp;
+        document.getElementById("pin-input").value = "";
+      }
+
+      function closeAdminModal() {
+        const modal = document.getElementById("admin-modal");
+        const content = document.getElementById("admin-modal-content");
+
+        content.classList.remove("scale-100", "opacity-100");
+        content.classList.add("scale-95", "opacity-0");
+
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          // Reset to authorization screen
+          document.getElementById("auth-panel").classList.remove("hidden");
+          document.getElementById("config-panel").classList.add("hidden");
+        }, 300);
+      }
+
+      function verifyPin() {
+        const pinVal = document.getElementById("pin-input").value;
+        if (pinVal === appConfigs.pin) {
+          document.getElementById("auth-panel").classList.add("hidden");
+          document.getElementById("config-panel").classList.remove("hidden");
+          showToast("Autentikasi Berhasil!", true);
+        } else {
+          showToast("PIN salah, silakan coba lagi.", false);
+        }
+      }
+
+      function logoutAdmin() {
+        document.getElementById("auth-panel").classList.remove("hidden");
+        document.getElementById("config-panel").classList.add("hidden");
+        document.getElementById("pin-input").value = "";
+        showToast("Berhasil Keluar Panel Operator", true);
+      }
+
+      function saveConfigurations() {
+        const status = document.getElementById("cfg-status").value;
+        const linkMerdeka = document.getElementById("cfg-link-merdeka").value;
+        const lokasi = document.getElementById("cfg-lokasi").value;
+        const linkPanduanRapor = document.getElementById("cfg-panduan-rapor").value;
+        const linkPanduanNilai = document.getElementById("cfg-panduan-nilai").value;
+        const announcement = document.getElementById("cfg-announcement").value;
+        const whatsapp = document.getElementById("cfg-whatsapp").value;
+        const newPin = document.getElementById("cfg-new-pin").value;
+
+        appConfigs.status = status;
+        appConfigs.linkMerdeka = linkMerdeka;
+        appConfigs.lokasi = lokasi;
+        appConfigs.linkPanduanRapor = linkPanduanRapor;
+        appConfigs.linkPanduanNilai = linkPanduanNilai;
+        appConfigs.announcement = announcement;
+        appConfigs.whatsapp = whatsapp;
+
+        if (newPin && newPin.trim().length > 0) {
+          appConfigs.pin = newPin.trim();
+        }
+
+        // Update Time
+        const now = new Date();
+        appConfigs.lastUpdated = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB";
+
+        // Save to localStorage
+        localStorage.setItem("era_configs", JSON.stringify(appConfigs));
+
+        // Apply modifications to page
+        applyConfigurations();
+
+        // Close dialog
+        closeAdminModal();
+        showToast("Konfigurasi Operator Berhasil Disimpan!", true);
+      }
+
+      // Initialize page state
+      window.onload = function () {
+        applyConfigurations();
+      };
+    </script>
+  </body>
+</html>
