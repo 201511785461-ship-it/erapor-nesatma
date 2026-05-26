@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -285,22 +285,22 @@
 
             <!-- PDF Panduan Rapor URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan e-Rapor</label>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF / Video Panduan e-Rapor</label>
               <input
                 type="url"
                 id="cfg-panduan-rapor"
-                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                placeholder="Tempel link PDF atau Google Drive Video"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
             <!-- PDF Panduan Pembelajaran URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan Penilaian</label>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF / Video Panduan Penilaian</label>
               <input
                 type="url"
                 id="cfg-panduan-nilai"
-                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                placeholder="Tempel link PDF atau Google Drive Video"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
@@ -341,13 +341,30 @@
 
     <!-- ==================== JAVASCRIPT CONTROLLER ==================== -->
     <script>
+      // Helper function to sanitize Google Drive URLs for Android Direct-Play compatibility
+      function formatDriveUrl(url) {
+        if (!url) return "#";
+        
+        // If it is a google drive file sharing link, convert it to secure iframe play link
+        if (url.includes("drive.google.com") && url.includes("/file/d/")) {
+          let parts = url.split("/file/d/");
+          if (parts.length > 1) {
+            let fileId = parts[1].split("/")[0];
+            return `https://drive.google.com/file/d/${fileId}/preview`;
+          }
+        }
+        return url;
+      }
+
       // CONFIGURATION DEFAULT STATE
       const DEFAULT_CONFIGS = {
         status: "online",
         linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app",
         lokasi: "Ruang Lab OmTa",
+        // Menggunakan mirror link resmi Kemdikbud (ditpsmp) yang stabil
         linkPanduanRapor: "https://ditpsmp.kemdikbud.go.id/download/panduan-aplikasi-e-rapor-kurikulum-merdeka-bagi-guru-dan-wali-kelas/",
-        linkPanduanNilai: "https://kurikulum.kemdikbud.go.id/wp-content/uploads/2022/06/Panduan-Pembelajaran-dan-Asesmen.pdf",
+        // Menggunakan tautan cadangan repositori kemdikbud yang aktif dibanding kurikulum.kemdikbud.go.id yang mati di gambar
+        linkPanduanNilai: "https://s.id/panduan-asesmen-merdeka-smp",
         announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!",
         whatsapp: "6285223344556", // Ganti dengan nomor asli Anda
         pin: "1234",
@@ -403,9 +420,9 @@
         document.getElementById("btn-whatsapp").href = `https://wa.me/${appConfigs.whatsapp}`;
         document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
 
-        // 5. Update PDF Manual Links
-        document.getElementById("link-panduan-rapor").href = appConfigs.linkPanduanRapor || "#";
-        document.getElementById("link-panduan-nilai").href = appConfigs.linkPanduanNilai || "#";
+        // 5. Update PDF Manual Links (Automated Android compatible conversion)
+        document.getElementById("link-panduan-rapor").href = formatDriveUrl(appConfigs.linkPanduanRapor);
+        document.getElementById("link-panduan-nilai").href = formatDriveUrl(appConfigs.linkPanduanNilai);
 
         // 6. Update Time Info
         document.getElementById("last-updated").innerText = `Update terakhir oleh Operator: ${appConfigs.lastUpdated}`;
@@ -455,6 +472,7 @@
         document.getElementById("pin-input").value = "";
       }
 
+      // Close Dialog
       function closeAdminModal() {
         const modal = document.getElementById("admin-modal");
         const content = document.getElementById("admin-modal-content");
