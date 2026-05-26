@@ -1,14 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal e-Rapor SMPN 1 Manonjaya</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome untuk Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
       body {
@@ -17,16 +14,13 @@
     </style>
   </head>
   <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
-    <!-- TOP HEADER / ANNOUNCEMENT BANNER -->
     <div id="announcement-bar" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-inner relative transition-all duration-300">
       <span id="announcement-text"><i class="fa-solid fa-bullhorn mr-2 animate-bounce"></i> Loading pengumuman...</span>
     </div>
 
-    <!-- MAIN NAVIGATION -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 transition-all duration-200">
       <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <!-- Decorative School Logo (SVG Emblem) -->
           <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
             <i class="fa-solid fa-school text-xl"></i>
           </div>
@@ -43,13 +37,9 @@
       </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- HERO & ACTION SECTION (LEFT SIDE) -->
       <section class="lg:col-span-8 space-y-6">
-        <!-- Hero Card -->
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden shadow-2xl">
-          <!-- Decorative background elements -->
           <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
           <div class="absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl -ml-20 -mb-20"></div>
 
@@ -61,7 +51,6 @@
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight leading-tight">Input Nilai Rapor Kini Lebih Mudah dari Rumah!</h2>
             <p class="text-slate-300 text-sm md:text-base max-w-xl">Selamat datang Bapak/Ibu Guru hebat SMPN 1 Manonjaya. Silakan akses portal e-Rapor resmi Kurikulum Merdeka di bawah ini menggunakan tautan terowongan Ngrok aktif.</p>
 
-            <!-- Server Status Badge -->
             <div class="pt-2 flex flex-wrap gap-4 items-center">
               <div class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg text-xs" id="status-container">
                 <span class="relative flex h-2 w-2">
@@ -75,7 +64,6 @@
           </div>
         </div>
 
-        <!-- RAPOR LINK ACCESS CARD -->
         <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="space-y-3">
@@ -104,7 +92,6 @@
           </div>
         </div>
 
-        <!-- EMBEDDED INTERACTIVE MEDIA PLAYER SECTION -->
         <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
           <div class="border-b border-slate-100 pb-4">
             <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -115,29 +102,14 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Video Player Widget -->
             <div class="space-y-3">
               <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
                 <i class="fa-solid fa-video text-rose-500"></i>
                 Video Panduan Operator
               </h4>
               <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner border border-slate-100 flex items-center justify-center">
-                <!-- Iframe Player for Google Drive / YouTube -->
-                <iframe 
-                  id="video-player-iframe" 
-                  src="" 
-                  class="absolute inset-0 w-full h-full border-0 hidden" 
-                  allow="autoplay; encrypted-media" 
-                  allowfullscreen>
-                </iframe>
-                <!-- Native Video Player for Local GitHub Files -->
-                <video 
-                  id="video-player-local" 
-                  src="" 
-                  controls 
-                  class="absolute inset-0 w-full h-full border-0 hidden bg-black">
-                </video>
-                <!-- Placeholder Video if link is empty -->
+                <iframe id="video-player-iframe" src="" class="absolute inset-0 w-full h-full border-0 hidden" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
+                <video id="video-player-local" src="" controls class="absolute inset-0 w-full h-full border-0 hidden bg-black"></video>
                 <div id="video-placeholder" class="text-center p-4 space-y-2 z-10">
                   <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto text-lg">
                     <i class="fa-solid fa-film"></i>
@@ -147,7 +119,6 @@
               </div>
             </div>
 
-            <!-- Audio Player Widget -->
             <div class="space-y-3 flex flex-col justify-between">
               <div class="space-y-3">
                 <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
@@ -164,14 +135,10 @@
                       <p class="text-[10px] text-slate-400" id="text-audio-filename">Nama File: Belum dikonfigurasi</p>
                     </div>
                   </div>
-                  <!-- Native HTML5 Audio Player style with Tailwind -->
-                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">
-                    Browser Anda tidak mendukung pemutar audio ini.
-                  </audio>
+                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">Browser Anda tidak mendukung pemutar audio ini.</audio>
                 </div>
               </div>
 
-              <!-- Location Info & Help Box -->
               <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 space-y-1">
                 <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Panduan Unggah Media</p>
                 <p class="text-[11px] text-indigo-950/80 leading-relaxed">
@@ -182,7 +149,6 @@
           </div>
         </div>
 
-        <!-- GUIDELINES SECTION -->
         <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
           <h3 class="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
             <i class="fa-solid fa-circle-info text-blue-500"></i>
@@ -214,9 +180,7 @@
         </div>
       </section>
 
-      <!-- HELP & INFORMATION PANEL (RIGHT SIDE) -->
       <aside class="lg:col-span-4 space-y-6">
-        <!-- Operator Profile -->
         <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm text-center">
           <div class="relative inline-block mx-auto mb-4">
             <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/25">
@@ -230,14 +194,8 @@
 
           <hr class="border-slate-100 my-4" />
 
-          <!-- Contact Buttons -->
           <div class="space-y-2">
-            <a
-              id="btn-whatsapp"
-              href="#"
-              target="_blank"
-              class="flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 text-xs w-full"
-            >
+            <a id="btn-whatsapp" href="#" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 text-xs w-full">
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>Hubungi via WhatsApp</span>
             </a>
@@ -248,7 +206,6 @@
           </div>
         </div>
 
-        <!-- Download Manuals Card -->
         <div class="bg-gradient-to-br from-indigo-50 to-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
           <h4 class="font-bold text-indigo-900 text-sm mb-2 flex items-center gap-2">
             <i class="fa-solid fa-cloud-arrow-down text-indigo-600"></i>
@@ -259,7 +216,7 @@
           <div class="space-y-2">
             <a
               id="link-panduan-rapor"
-              href="https://drive.google.com/file/d/1CnD8QrmoycgOlDaNc3LScf9Uoj5zxjv-/preview"
+              href="#"
               target="_blank"
               class="flex items-center justify-between p-3 bg-white rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-sm transition-all text-xs text-slate-700 font-medium group"
             >
@@ -271,7 +228,7 @@
             </a>
             <a
               id="link-panduan-nilai"
-              href="https://drive.google.com/file/d/1ivTYccxjtmc_M8zGIIISpeTbQRNV3zMx/preview"
+              href="#"
               target="_blank"
               class="flex items-center justify-between p-3 bg-white rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-sm transition-all text-xs text-slate-700 font-medium group"
             >
@@ -286,7 +243,6 @@
       </aside>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-100 py-6 mt-12 text-center text-xs text-slate-400">
       <div class="max-w-6xl mx-auto px-4 space-y-2">
         <p>&copy; 2026 SMP Negeri 1 Manonjaya. All rights reserved.</p>
@@ -297,12 +253,8 @@
       </div>
     </footer>
 
-    <!-- ==================== MODALS & PANEL SYSTEM ==================== -->
-
-    <!-- PREVIEW TESTING MODAL -->
     <div id="admin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="admin-modal-content">
-        <!-- Auth Screen (PIN Requirement) -->
         <div id="auth-panel" class="p-6 space-y-4">
           <div class="text-center space-y-2">
             <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl">
@@ -328,7 +280,6 @@
           </div>
         </div>
 
-        <!-- Config Form Screen -->
         <div id="config-panel" class="hidden">
           <div class="bg-slate-950 p-6 text-white flex items-center justify-between">
             <div>
@@ -341,10 +292,10 @@
           <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
             <div class="bg-amber-50 border border-amber-200 text-amber-800 rounded-xl p-3 text-xs leading-relaxed">
               <i class="fa-solid fa-circle-exclamation mr-1"></i>
-              <strong>INFO OPERATOR:</strong> Perubahan di sini hanya bekerja sementara di browser Anda. Untuk menyimpan permanen bagi seluruh guru, silakan salin nilainya dan edit langsung di file <code class="bg-amber-100 px-1 py-0.5 rounded font-mono font-semibold">index.html</code> bagian <code class="font-semibold">DEFAULT_CONFIGS</code> pada GitHub Anda.
+              <strong>INFO OPERATOR:</strong> Perubahan di sini hanya bekerja sementara di browser Anda. Untuk menyimpan permanen bagi seluruh guru, silakan salin nilainya dan edit langsung di file
+              <code class="bg-amber-100 px-1 py-0.5 rounded font-mono font-semibold">index.html</code> bagian <code class="font-semibold">DEFAULT_CONFIGS</code> pada GitHub Anda.
             </div>
 
-            <!-- Status Toggle -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Status Server Saat Ini</label>
               <select id="cfg-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
@@ -354,65 +305,61 @@
               </select>
             </div>
 
-            <!-- Merdeka URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Ngrok e-Rapor Merdeka</label>
               <input type="url" id="cfg-link-merdeka" placeholder="https://xxxx-xx-xx-xx.ngrok-free.app" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
-            <!-- Lokasi Offline -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Lokasi Posko Offline</label>
               <input type="text" id="cfg-lokasi" placeholder="Contoh: Ruang Lab OmTa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
-            <!-- Video Player URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Video / Nama File Video GitHub</label>
               <input type="text" id="cfg-video-url" placeholder="Contoh: Panduan_e-Rapor_SMP_2025.mp4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
-            <!-- Audio Player URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio / Nama File Audio GitHub</label>
-              <input type="text" id="cfg-audio-url" placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input
+                type="text"
+                id="cfg-audio-url"
+                placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+              />
             </div>
 
-            <!-- PDF Panduan Rapor URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan e-Rapor</label>
               <input
                 type="url"
                 id="cfg-panduan-rapor"
-                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                placeholder="Tempel link PDF"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
-            <!-- PDF Panduan Pembelajaran URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan Penilaian</label>
               <input
                 type="url"
                 id="cfg-panduan-nilai"
-                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
+                placeholder="Tempel link PDF"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
-            <!-- Announcement Text -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Pengumuman / Berita Terkini</label>
               <textarea id="cfg-announcement" rows="2" placeholder="Tulis pengumuman di sini..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
             </div>
 
-            <!-- WhatsApp Link -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Nomor WhatsApp Operator (Sertakan Kode Negara)</label>
               <input type="text" id="cfg-whatsapp" placeholder="628123456789" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
-            <!-- Action buttons -->
             <div class="flex gap-2 pt-2">
               <button onclick="closeAdminModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition-colors">Batal</button>
               <button onclick="saveConfigurations()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Uji Coba Tampilan</button>
@@ -422,20 +369,18 @@
       </div>
     </div>
 
-    <!-- TOAST NOTIFICATION MODAL -->
     <div id="toast-notif" class="fixed bottom-4 right-4 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
       <i class="fa-solid fa-circle-check text-emerald-400" id="toast-icon"></i>
       <span class="text-xs font-semibold" id="toast-message">Uji coba tampilan berhasil dimuat!</span>
     </div>
 
-    <!-- ==================== JAVASCRIPT CONTROLLER ==================== -->
     <script>
       // Helper function to sanitize Google Drive URLs for Android Direct-Play compatibility
       function formatDriveUrl(url) {
         if (!url) return "";
 
-        // 🌟 JIKA LINK SUDAH MENGANDUNG /preview, LANGSUNG LOLOSKAN TANPA DIUBAH
-        if (url.includes("/preview")) {
+        // 🌟 JIKA LINK SUDAH MATANG / BERUPA PDF GITHUB, JANGAN DIUTAK-ATIK LANGSUNG LOLOSKAN
+        if (url.includes("/preview") || url.includes(".pdf")) {
           return url;
         }
 
@@ -468,7 +413,6 @@
           let parts = url.split("/file/d/");
           if (parts.length > 1) {
             let fileId = parts[1].split("/")[0];
-            // Uses google drive direct stream link for HTML5 audio
             return `https://docs.google.com/uc?export=open&id=${fileId}`;
           }
         }
@@ -480,21 +424,20 @@
       // Edit nilai di bawah ini langsung di GitHub untuk mengubah setelan bagi seluruh guru.
       // =========================================================================
       const DEFAULT_CONFIGS = {
-        status: "online", // Pilihan: "online" | "maintenance" | "offline"
-        linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app", // Link Ngrok Aktif Anda
-        lokasi: "Ruang Lab OmTa", // Lokasi fisik posko bantuan
-        videoUrl: "Panduan_e-Rapor_SMP_2025.mp4", // Nama file video lokal di GitHub
-        audioUrl: "E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a", // Nama file audio lokal di GitHub
-        linkPanduanRapor: "https://drive.google.com/file/d/1Cnd8QrmoycgOlDaNc3LScF0r7lV7L7m3/view?usp=sharing", // Link PDF Panduan e-Rapor
-        linkPanduanNilai: "https://drive.google.com/file/d/1ivTYccxjtmc_M8zGllISpeTbQfOIdrQW/view?usp=sharing", // Link PDF Panduan Penilaian
-        announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!", // Pengumuman berjalan
-        whatsapp: "6285223664766", // Nomor WA Anda (Format kode negara: 628xxx)
-        pin: "1234", // PIN Pengaman untuk masuk Panel Mode Uji
-        lastUpdated: "Baru Saja" // Waktu pembaharuan terakhir
+        status: "online", 
+        linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app", 
+        lokasi: "Ruang Lab OmTa", 
+        videoUrl: "Panduan_e-Rapor_SMP_2025.mp4", 
+        audioUrl: "E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a", 
+        // 🌟 LINK FIX PERMANEN MENEMBAK LANGSUNG KE REPOSITORY GITHUB KAMU (ANTI-DOWN / ANTI-ERROR) 🌟
+        linkPanduanRapor: "https://201511785461-ship-it.github.io/erapor-nesatma/panduan%20erapor.pdf", 
+        linkPanduanNilai: "https://201511785461-ship-it.github.io/erapor-nesatma/panduan%20penilaian.pdf", 
+        announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!", 
+        whatsapp: "6285223344556", 
+        pin: "1234", 
+        lastUpdated: "Baru Saja", 
       };
 
-      // KINI MENGGUNAKAN STATE DI MEMORI (SINKRON SEPENUHNYA DARI CODE GITHUB!)
-      // Seluruh pemuatan dan penyimpanan localStorage telah dihapus total.
       let appConfigs = { ...DEFAULT_CONFIGS };
 
       // Render Configuration to UI
@@ -503,7 +446,6 @@
         const linkMerdekaBtn = document.getElementById("link-merdeka");
         const textMerdekaBtn = document.getElementById("text-link-merdeka");
 
-        // Merdeka Link
         if (appConfigs.linkMerdeka) {
           linkMerdekaBtn.href = appConfigs.linkMerdeka;
           textMerdekaBtn.innerText = "Link: " + appConfigs.linkMerdeka;
@@ -541,135 +483,86 @@
 
         // 4. Update WhatsApp Contact & Location Info
         document.getElementById("btn-whatsapp").href = `https://wa.me/${appConfigs.whatsapp}`;
-        document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
+        document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi;
 
-        // 5. Update PDF Manual Links
-        document.getElementById("link-panduan-rapor").href = formatDriveUrl(appConfigs.linkPanduanRapor);
-        document.getElementById("link-panduan-nilai").href = formatDriveUrl(appConfigs.linkPanduanNilai);
+        // 5. Update PDF Manual Links dengan Anti-Cache System (?v=)
+        const cacheBuster = "?v=" + new Date().getTime();
+        document.getElementById("link-panduan-rapor").href = formatDriveUrl(appConfigs.linkPanduanRapor) + cacheBuster;
+        document.getElementById("link-panduan-nilai").href = formatDriveUrl(appConfigs.linkPanduanNilai) + cacheBuster;
 
-        // 6. Update Embedded Media Elements
-        const videoPlayerIframe = document.getElementById("video-player-iframe");
-        const videoPlayerLocal = document.getElementById("video-player-local");
-        const videoPlaceholder = document.getElementById("video-placeholder");
-        const audioPlayer = document.getElementById("audio-player");
-        const textAudioFilename = document.getElementById("text-audio-filename");
-
-        // Video URL Configuration
-        if (appConfigs.videoUrl && appConfigs.videoUrl.trim() !== "") {
-          const vUrl = appConfigs.videoUrl.trim();
-          videoPlaceholder.classList.add("hidden");
-          
-          // Check if it is a relative path (doesn't start with http/https) -> local GitHub file
-          if (!vUrl.startsWith("http://") && !vUrl.startsWith("https://")) {
-            videoPlayerLocal.src = vUrl;
-            videoPlayerLocal.classList.remove("hidden");
-            videoPlayerIframe.classList.add("hidden");
-            videoPlayerIframe.src = "";
+        // 6. Media Player Setup (Video & Audio)
+        const vIframe = document.getElementById("video-player-iframe");
+        const vLocal = document.getElementById("video-player-local");
+        const vPlaceholder = document.getElementById("video-placeholder");
+        
+        if (appConfigs.videoUrl) {
+          vPlaceholder.classList.add("hidden");
+          if (appConfigs.videoUrl.includes("drive.google.com") || appConfigs.videoUrl.includes("youtube.com") || appConfigs.videoUrl.includes("youtu.be")) {
+            vIframe.src = formatDriveUrl(appConfigs.videoUrl);
+            vIframe.classList.remove("hidden");
+            vLocal.classList.add("hidden");
           } else {
-            // External URL (YouTube or Google Drive Embed)
-            videoPlayerIframe.src = formatDriveUrl(vUrl);
-            videoPlayerIframe.classList.remove("hidden");
-            videoPlayerLocal.classList.add("hidden");
-            videoPlayerLocal.src = "";
+            vLocal.src = appConfigs.videoUrl;
+            vLocal.classList.remove("hidden");
+            vIframe.classList.add("hidden");
           }
         } else {
-          videoPlayerIframe.classList.add("hidden");
-          videoPlayerIframe.src = "";
-          videoPlayerLocal.classList.add("hidden");
-          videoPlayerLocal.src = "";
-          videoPlaceholder.classList.remove("hidden");
+          vPlaceholder.classList.remove("hidden");
+          vIframe.classList.add("hidden");
+          vLocal.classList.add("hidden");
         }
 
-        // Audio URL Configuration
-        if (appConfigs.audioUrl && appConfigs.audioUrl.trim() !== "") {
-          const aUrl = appConfigs.audioUrl.trim();
-          textAudioFilename.innerText = "File: " + aUrl;
-          
-          // Check if it is a relative path (local file on GitHub)
-          if (!aUrl.startsWith("http://") && !aUrl.startsWith("https://")) {
-            audioPlayer.src = aUrl;
-          } else {
-            audioPlayer.src = formatAudioUrl(aUrl);
-          }
+        const audioPlayer = document.getElementById("audio-player");
+        const audioText = document.getElementById("text-audio-filename");
+        if (appConfigs.audioUrl) {
+          audioPlayer.src = formatAudioUrl(appConfigs.audioUrl);
+          audioText.innerText = "Nama File: " + appConfigs.audioUrl.split("/").pop();
         } else {
           audioPlayer.src = "";
-          textAudioFilename.innerText = "Nama File: Belum dikonfigurasi";
+          audioText.innerText = "Nama File: Belum dikonfigurasi";
         }
-
-        // 7. Update Time Info
-        document.getElementById("last-updated").innerText = `Update terakhir oleh Operator: ${appConfigs.lastUpdated}`;
       }
 
-      // CUSTOM TOAST NOTIFICATION
-      function showToast(message, isSuccess = true) {
-        const toast = document.getElementById("toast-notif");
-        const toastIcon = document.getElementById("toast-icon");
-        const toastMsg = document.getElementById("toast-message");
-
-        toastMsg.innerText = message;
-        if (isSuccess) {
-          toastIcon.className = "fa-solid fa-circle-check text-emerald-400";
-        } else {
-          toastIcon.className = "fa-solid fa-circle-xmark text-rose-500";
-        }
-
-        toast.classList.remove("translate-y-20", "opacity-0");
-        toast.classList.add("translate-y-0", "opacity-100");
-
-        setTimeout(() => {
-          toast.classList.remove("translate-y-0", "opacity-100");
-          toast.classList.add("translate-y-20", "opacity-0");
-        }, 3000);
-      }
-
-      // ADMIN MODAL FLOWS
+      // MODAL CONTROLLERS
       function openAdminModal() {
         const modal = document.getElementById("admin-modal");
         const content = document.getElementById("admin-modal-content");
-
         modal.classList.remove("hidden");
         setTimeout(() => {
           content.classList.remove("scale-95", "opacity-0");
           content.classList.add("scale-100", "opacity-100");
         }, 10);
-
-        // Set inputs to match current state
-        document.getElementById("cfg-status").value = appConfigs.status;
-        document.getElementById("cfg-link-merdeka").value = appConfigs.linkMerdeka;
-        document.getElementById("cfg-lokasi").value = appConfigs.lokasi || "Ruang Lab OmTa";
-        document.getElementById("cfg-video-url").value = appConfigs.videoUrl || "";
-        document.getElementById("cfg-audio-url").value = appConfigs.audioUrl || "";
-        document.getElementById("cfg-panduan-rapor").value = appConfigs.linkPanduanRapor || "";
-        document.getElementById("cfg-panduan-nilai").value = appConfigs.linkPanduanNilai || "";
-        document.getElementById("cfg-announcement").value = appConfigs.announcement;
-        document.getElementById("cfg-whatsapp").value = appConfigs.whatsapp;
-        document.getElementById("pin-input").value = "";
       }
 
-      // Close Dialog
       function closeAdminModal() {
         const modal = document.getElementById("admin-modal");
         const content = document.getElementById("admin-modal-content");
-
         content.classList.remove("scale-100", "opacity-100");
         content.classList.add("scale-95", "opacity-0");
-
         setTimeout(() => {
           modal.classList.add("hidden");
-          // Reset to authorization screen
-          document.getElementById("auth-panel").classList.remove("hidden");
-          document.getElementById("config-panel").classList.add("hidden");
+          document.getElementById("pin-input").value = "";
         }, 300);
       }
 
       function verifyPin() {
-        const pinVal = document.getElementById("pin-input").value;
-        if (pinVal === appConfigs.pin) {
+        const pin = document.getElementById("pin-input").value;
+        if (pin === appConfigs.pin) {
           document.getElementById("auth-panel").classList.add("hidden");
           document.getElementById("config-panel").classList.remove("hidden");
-          showToast("Autentikasi Berhasil!", true);
+          
+          // Populate fields
+          document.getElementById("cfg-status").value = appConfigs.status;
+          document.getElementById("cfg-link-merdeka").value = appConfigs.linkMerdeka;
+          document.getElementById("cfg-lokasi").value = appConfigs.lokasi;
+          document.getElementById("cfg-video-url").value = appConfigs.videoUrl;
+          document.getElementById("cfg-audio-url").value = appConfigs.audioUrl;
+          document.getElementById("cfg-panduan-rapor").value = appConfigs.linkPanduanRapor;
+          document.getElementById("cfg-panduan-nilai").value = appConfigs.linkPanduanNilai;
+          document.getElementById("cfg-announcement").value = appConfigs.announcement;
+          document.getElementById("cfg-whatsapp").value = appConfigs.whatsapp;
         } else {
-          showToast("PIN salah, silakan coba lagi.", false);
+          alert("PIN Salah! Coba lagi bro.");
         }
       }
 
@@ -677,10 +570,8 @@
         document.getElementById("auth-panel").classList.remove("hidden");
         document.getElementById("config-panel").classList.add("hidden");
         document.getElementById("pin-input").value = "";
-        showToast("Keluar dari Mode Uji", true);
       }
 
-      // MENYIMPAN HANYA KE LOCAL MEMORY SEBAGAI PREVIEW SEMENTARA
       function saveConfigurations() {
         appConfigs.status = document.getElementById("cfg-status").value;
         appConfigs.linkMerdeka = document.getElementById("cfg-link-merdeka").value;
@@ -692,19 +583,22 @@
         appConfigs.announcement = document.getElementById("cfg-announcement").value;
         appConfigs.whatsapp = document.getElementById("cfg-whatsapp").value;
 
-        // Update Time untuk Pratinjau
-        const now = new Date();
-        appConfigs.lastUpdated = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB (Preview)";
-
-        // Apply ke halaman web Anda saat ini
         applyConfigurations();
-
-        // Tutup dialog
         closeAdminModal();
-        showToast("Tampilan berhasil diperbarui dalam mode uji!", true);
+        showToast();
       }
 
-      // Initialize page state on load
+      function showToast() {
+        const toast = document.getElementById("toast-notif");
+        toast.classList.remove("translate-y-20", "opacity-0");
+        toast.classList.add("translate-y-0", "opacity-100");
+        setTimeout(() => {
+          toast.classList.remove("translate-y-0", "opacity-100");
+          toast.classList.add("translate-y-20", "opacity-0");
+        }, 3000);
+      }
+
+      // Initialize Application
       window.onload = function () {
         applyConfigurations();
       };
