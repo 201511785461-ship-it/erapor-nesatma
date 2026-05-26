@@ -104,12 +104,11 @@
           </div>
         </div>
 
-        <!-- NEW: EMBEDDED INTERACTIVE MEDIA PLAYER SECTION -->
+        <!-- EMBEDDED INTERACTIVE MEDIA PLAYER SECTION -->
         <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
           <div class="border-b border-slate-100 pb-4">
             <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-play-css text-blue-600"></i>
-              <i class="fa-solid fa-photo-film text-blue-500"></i>
+              <i class="fa-solid fa-photo-film text-blue-600"></i>
               Ruang Panduan Multimedia (Langsung Putar di HP)
             </h3>
             <p class="text-xs text-slate-500 mt-1">Tonton video panduan atau dengarkan rekaman instruksi dari Operator Dapodik tanpa keluar dari aplikasi.</p>
@@ -123,13 +122,21 @@
                 Video Panduan Operator
               </h4>
               <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner border border-slate-100 flex items-center justify-center">
+                <!-- Iframe Player for Google Drive / YouTube -->
                 <iframe 
-                  id="video-player" 
-                  src="Panduan_e-Rapor_SMP_2025.mp4" 
+                  id="video-player-iframe" 
+                  src="" 
                   class="absolute inset-0 w-full h-full border-0 hidden" 
                   allow="autoplay; encrypted-media" 
                   allowfullscreen>
                 </iframe>
+                <!-- Native Video Player for Local GitHub Files -->
+                <video 
+                  id="video-player-local" 
+                  src="" 
+                  controls 
+                  class="absolute inset-0 w-full h-full border-0 hidden bg-black">
+                </video>
                 <!-- Placeholder Video if link is empty -->
                 <div id="video-placeholder" class="text-center p-4 space-y-2 z-10">
                   <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto text-lg">
@@ -154,7 +161,7 @@
                     </div>
                     <div>
                       <p class="text-xs font-bold text-slate-800">Penjelasan & Diskusi e-Rapor</p>
-                      <p class="text-[10px] text-slate-400">Format Rekaman Diskusi/Suara Instan</p>
+                      <p class="text-[10px] text-slate-400" id="text-audio-filename">Nama File: Belum dikonfigurasi</p>
                     </div>
                   </div>
                   <!-- Native HTML5 Audio Player style with Tailwind -->
@@ -166,8 +173,10 @@
 
               <!-- Location Info & Help Box -->
               <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 space-y-1">
-                <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Tips Pemutaran HP</p>
-                <p class="text-[11px] text-indigo-950/80 leading-relaxed">Jika video tidak muncul, pastikan Anda sudah login akun Google Anda di browser HP, atau klik tombol titik tiga di pojok kanan atas WA lalu pilih <strong>Buka di Chrome</strong>.</p>
+                <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Panduan Unggah Media</p>
+                <p class="text-[11px] text-indigo-950/80 leading-relaxed">
+                  Ketikkan nama file persis yang ada di GitHub kamu (misalnya: <code class="bg-indigo-100 px-1 py-0.5 rounded font-mono font-semibold">E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a</code>) ke dalam kolom input di Panel Operator.
+                </p>
               </div>
             </div>
           </div>
@@ -354,14 +363,14 @@
 
             <!-- Video Player URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Video Panduan (Google Drive/YouTube)</label>
-              <input type="url" id="cfg-video-url" placeholder="Sematkan link video untuk diputar langsung di HP" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Video / Nama File Video GitHub</label>
+              <input type="text" id="cfg-video-url" placeholder="Contoh: Panduan_e-Rapor_SMP_2025.mp4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
             <!-- Audio Player URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio Panduan (MP3/Drive Audio)</label>
-              <input type="url" id="cfg-audio-url" placeholder="Sematkan link file audio MP3/WAV" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio / Nama File Audio GitHub</label>
+              <input type="text" id="cfg-audio-url" placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
             <!-- PDF Panduan Rapor URL -->
@@ -414,7 +423,7 @@
       </div>
     </div>
 
-    <!-- TOAST NOTIFICATION MODAL (NO ALERT RULE) -->
+    <!-- TOAST NOTIFICATION MODAL -->
     <div id="toast-notif" class="fixed bottom-4 right-4 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
       <i class="fa-solid fa-circle-check text-emerald-400" id="toast-icon"></i>
       <span class="text-xs font-semibold" id="toast-message">Konfigurasi berhasil diperbarui!</span>
@@ -462,13 +471,13 @@
         return url;
       }
 
-      // CONFIGURATION DEFAULT STATE
+      // CONFIGURATION DEFAULT STATE (Tailored for direct GitHub relative files!)
       const DEFAULT_CONFIGS = {
         status: "online",
         linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app",
         lokasi: "Ruang Lab OmTa",
-        videoUrl: "https://drive.google.com/file/d/1xRfNVpHO18KhsKU1Jd5ZvpGHsQW4Dlx6/view?usp=sharing", // Tautkan video asli kamu di sini
-        audioUrl: "", // Tempel tautan rekaman suara kamu berformat MP3 di sini
+        videoUrl: "Panduan_e-Rapor_SMP_2025.mp4", // Otomatis terhubung dengan file lokal kamu di GitHub!
+        audioUrl: "E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a", // Sudah disesuaikan menggunakan format asli kamu .m4a!
         linkPanduanRapor: "https://s.id/panduan-erapor-smp",
         linkPanduanNilai: "https://s.id/panduan-pembelajaran-asesmen",
         announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!",
@@ -531,24 +540,52 @@
         document.getElementById("link-panduan-nilai").href = appConfigs.linkPanduanNilai;
 
         // 6. Update Embedded Media Elements
-        const videoPlayer = document.getElementById("video-player");
+        const videoPlayerIframe = document.getElementById("video-player-iframe");
+        const videoPlayerLocal = document.getElementById("video-player-local");
         const videoPlaceholder = document.getElementById("video-placeholder");
         const audioPlayer = document.getElementById("audio-player");
+        const textAudioFilename = document.getElementById("text-audio-filename");
 
+        // Video URL Configuration
         if (appConfigs.videoUrl && appConfigs.videoUrl.trim() !== "") {
-          videoPlayer.src = formatDriveUrl(appConfigs.videoUrl);
-          videoPlayer.classList.remove("hidden");
+          const vUrl = appConfigs.videoUrl.trim();
           videoPlaceholder.classList.add("hidden");
+          
+          // Check if it is a relative path (doesn't start with http/https) -> local GitHub file
+          if (!vUrl.startsWith("http://") && !vUrl.startsWith("https://")) {
+            videoPlayerLocal.src = vUrl;
+            videoPlayerLocal.classList.remove("hidden");
+            videoPlayerIframe.classList.add("hidden");
+            videoPlayerIframe.src = "";
+          } else {
+            // External URL (YouTube or Google Drive Embed)
+            videoPlayerIframe.src = formatDriveUrl(vUrl);
+            videoPlayerIframe.classList.remove("hidden");
+            videoPlayerLocal.classList.add("hidden");
+            videoPlayerLocal.src = "";
+          }
         } else {
-          videoPlayer.src = "";
-          videoPlayer.classList.add("hidden");
+          videoPlayerIframe.classList.add("hidden");
+          videoPlayerIframe.src = "";
+          videoPlayerLocal.classList.add("hidden");
+          videoPlayerLocal.src = "";
           videoPlaceholder.classList.remove("hidden");
         }
 
+        // Audio URL Configuration
         if (appConfigs.audioUrl && appConfigs.audioUrl.trim() !== "") {
-          audioPlayer.src = formatAudioUrl(appConfigs.audioUrl);
+          const aUrl = appConfigs.audioUrl.trim();
+          textAudioFilename.innerText = "File: " + aUrl;
+          
+          // Check if it is a relative path (local file on GitHub)
+          if (!aUrl.startsWith("http://") && !aUrl.startsWith("https://")) {
+            audioPlayer.src = aUrl;
+          } else {
+            audioPlayer.src = formatAudioUrl(aUrl);
+          }
         } else {
           audioPlayer.src = "";
+          textAudioFilename.innerText = "Nama File: Belum dikonfigurasi";
         }
 
         // 7. Update Time Info
