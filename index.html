@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -19,7 +19,7 @@
   <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
     <!-- TOP HEADER / ANNOUNCEMENT BANNER -->
     <div id="announcement-bar" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-inner relative transition-all duration-300">
-      <span id="announcement-text"><i class="fa-solid fa-bullhorn mr-2 animate-bounce"></i> Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!</span>
+      <span id="announcement-text"><i class="fa-solid fa-bullhorn mr-2 animate-bounce"></i> Loading pengumuman...</span>
     </div>
 
     <!-- MAIN NAVIGATION -->
@@ -37,8 +37,8 @@
         </div>
 
         <button onclick="openAdminModal()" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors duration-200 px-3 py-1.5 rounded-lg text-xs font-semibold">
-          <i class="fa-solid fa-user-gear"></i>
-          <span>Operator Panel</span>
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <span>Uji Konfigurasi (Preview)</span>
         </button>
       </div>
     </header>
@@ -123,9 +123,20 @@
               </h4>
               <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner border border-slate-100 flex items-center justify-center">
                 <!-- Iframe Player for Google Drive / YouTube -->
-                <iframe id="video-player-iframe" src="" class="absolute inset-0 w-full h-full border-0 hidden" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
+                <iframe 
+                  id="video-player-iframe" 
+                  src="" 
+                  class="absolute inset-0 w-full h-full border-0 hidden" 
+                  allow="autoplay; encrypted-media" 
+                  allowfullscreen>
+                </iframe>
                 <!-- Native Video Player for Local GitHub Files -->
-                <video id="video-player-local" src="" controls class="absolute inset-0 w-full h-full border-0 hidden bg-black"></video>
+                <video 
+                  id="video-player-local" 
+                  src="" 
+                  controls 
+                  class="absolute inset-0 w-full h-full border-0 hidden bg-black">
+                </video>
                 <!-- Placeholder Video if link is empty -->
                 <div id="video-placeholder" class="text-center p-4 space-y-2 z-10">
                   <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto text-lg">
@@ -154,7 +165,9 @@
                     </div>
                   </div>
                   <!-- Native HTML5 Audio Player style with Tailwind -->
-                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">Browser Anda tidak mendukung pemutar audio ini.</audio>
+                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">
+                    Browser Anda tidak mendukung pemutar audio ini.
+                  </audio>
                 </div>
               </div>
 
@@ -162,8 +175,7 @@
               <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 space-y-1">
                 <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Panduan Unggah Media</p>
                 <p class="text-[11px] text-indigo-950/80 leading-relaxed">
-                  Ketikkan nama file persis yang ada di GitHub kamu (misalnya: <code class="bg-indigo-100 px-1 py-0.5 rounded font-mono font-semibold">E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a</code>) ke dalam kolom input di Panel
-                  Operator.
+                  Jika Anda ingin memperbarui video atau audio, edit file ini di GitHub Anda dan ubah pada bagian konfigurasi <code class="bg-indigo-100 px-1 py-0.5 rounded font-mono font-semibold">DEFAULT_CONFIGS</code>.
                 </p>
               </div>
             </div>
@@ -222,7 +234,7 @@
           <div class="space-y-2">
             <a
               id="btn-whatsapp"
-              href="https://wa.me/628123456789"
+              href="#"
               target="_blank"
               class="flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 text-xs w-full"
             >
@@ -287,7 +299,7 @@
 
     <!-- ==================== MODALS & PANEL SYSTEM ==================== -->
 
-    <!-- ADMIN CONFIGURATION MODAL (Operator Panel) -->
+    <!-- PREVIEW TESTING MODAL -->
     <div id="admin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="admin-modal-content">
         <!-- Auth Screen (PIN Requirement) -->
@@ -296,12 +308,12 @@
             <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl">
               <i class="fa-solid fa-lock"></i>
             </div>
-            <h3 class="font-bold text-slate-800 text-lg">Verifikasi Operator</h3>
-            <p class="text-xs text-slate-500">Masukkan PIN Operator untuk memvalidasi akses panel konfigurasi.</p>
+            <h3 class="font-bold text-slate-800 text-lg">Panel Uji Coba Konfigurasi</h3>
+            <p class="text-xs text-slate-500">Gunakan panel ini untuk menguji konfigurasi sementara di browser Anda.</p>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">PIN Rahasia (Bawaan: 1234)</label>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">PIN Masuk (Bawaan: 1234)</label>
             <input
               type="password"
               id="pin-input"
@@ -312,7 +324,7 @@
 
           <div class="flex gap-2">
             <button onclick="closeAdminModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition-colors">Batal</button>
-            <button onclick="verifyPin()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Verifikasi</button>
+            <button onclick="verifyPin()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Masuk Mode Uji</button>
           </div>
         </div>
 
@@ -320,13 +332,18 @@
         <div id="config-panel" class="hidden">
           <div class="bg-slate-950 p-6 text-white flex items-center justify-between">
             <div>
-              <h3 class="font-bold text-sm">Dashboard Operator</h3>
-              <p class="text-[10px] text-slate-400">Atur link e-Rapor & Status Server</p>
+              <h3 class="font-bold text-sm">Mode Uji Coba Portal</h3>
+              <p class="text-[10px] text-slate-300">Setelan di bawah ini bersifat sementara!</p>
             </div>
             <button onclick="logoutAdmin()" class="text-slate-400 hover:text-white transition-colors text-xs flex items-center gap-1"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
           </div>
 
           <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+            <div class="bg-amber-50 border border-amber-200 text-amber-800 rounded-xl p-3 text-xs leading-relaxed">
+              <i class="fa-solid fa-circle-exclamation mr-1"></i>
+              <strong>INFO OPERATOR:</strong> Perubahan di sini hanya bekerja sementara di browser Anda. Untuk menyimpan permanen bagi seluruh guru, silakan salin nilainya dan edit langsung di file <code class="bg-amber-100 px-1 py-0.5 rounded font-mono font-semibold">index.html</code> bagian <code class="font-semibold">DEFAULT_CONFIGS</code> pada GitHub Anda.
+            </div>
+
             <!-- Status Toggle -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Status Server Saat Ini</label>
@@ -358,12 +375,7 @@
             <!-- Audio Player URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio / Nama File Audio GitHub</label>
-              <input
-                type="text"
-                id="cfg-audio-url"
-                placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a"
-                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
-              />
+              <input type="text" id="cfg-audio-url" placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
             <!-- PDF Panduan Rapor URL -->
@@ -400,16 +412,10 @@
               <input type="text" id="cfg-whatsapp" placeholder="628123456789" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
-            <!-- Change PIN Option -->
-            <div class="border-t border-slate-100 pt-3">
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Ubah PIN Operator Baru</label>
-              <input type="password" id="cfg-new-pin" placeholder="Kosongkan jika tidak ingin diubah" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
-            </div>
-
             <!-- Action buttons -->
             <div class="flex gap-2 pt-2">
               <button onclick="closeAdminModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition-colors">Batal</button>
-              <button onclick="saveConfigurations()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Simpan Perubahan</button>
+              <button onclick="saveConfigurations()" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-lg shadow-blue-500/20 transition-colors">Uji Coba Tampilan</button>
             </div>
           </div>
         </div>
@@ -419,7 +425,7 @@
     <!-- TOAST NOTIFICATION MODAL -->
     <div id="toast-notif" class="fixed bottom-4 right-4 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
       <i class="fa-solid fa-circle-check text-emerald-400" id="toast-icon"></i>
-      <span class="text-xs font-semibold" id="toast-message">Konfigurasi berhasil diperbarui!</span>
+      <span class="text-xs font-semibold" id="toast-message">Uji coba tampilan berhasil dimuat!</span>
     </div>
 
     <!-- ==================== JAVASCRIPT CONTROLLER ==================== -->
@@ -427,7 +433,7 @@
       // Helper function to sanitize Google Drive URLs for Android Direct-Play compatibility
       function formatDriveUrl(url) {
         if (!url) return "";
-
+        
         // Convert google drive file sharing link to secure embed preview link
         if (url.includes("drive.google.com") && url.includes("/file/d/")) {
           let parts = url.split("/file/d/");
@@ -436,7 +442,7 @@
             return `https://drive.google.com/file/d/${fileId}/preview`;
           }
         }
-
+        
         // Convert YouTube watch link to embed link
         if (url.includes("youtube.com/watch?v=")) {
           let videoId = url.split("v=")[1]?.split("&")[0];
@@ -464,30 +470,28 @@
         return url;
       }
 
-      // CONFIGURATION DEFAULT STATE (Tailored for direct GitHub relative files!)
+      // =========================================================================
+      // 🌟 CONFIGURATION GLOBAL (SOURCE OF TRUTH!) 🌟
+      // Edit nilai di bawah ini langsung di GitHub untuk mengubah setelan bagi seluruh guru.
+      // =========================================================================
       const DEFAULT_CONFIGS = {
-        status: "online",
-        linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app",
-        lokasi: "Ruang Lab OmTa",
-        videoUrl: "Panduan_e-Rapor_SMP_2025.mp4", // Otomatis terhubung dengan file lokal kamu di GitHub!
-        audioUrl: "E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a", // Sudah disesuaikan menggunakan format asli kamu .m4a!
-        linkPanduanRapor: "https://s.id/panduan-erapor-smp",
-        linkPanduanNilai: "https://s.id/panduan-pembelajaran-asesmen",
-        announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!",
-        whatsapp: "6285223344556", // Ganti dengan nomor asli Anda
-        pin: "1234",
-        lastUpdated: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB",
+        status: "online", // Pilihan: "online" | "maintenance" | "offline"
+        linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app", // Link Ngrok Aktif Anda
+        lokasi: "Ruang Lab OmTa", // Lokasi fisik posko bantuan
+        videoUrl: "Panduan_e-Rapor_SMP_2025.mp4", // Nama file video lokal di GitHub
+        audioUrl: "E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a", // Nama file audio lokal di GitHub
+        linkPanduanRapor: "https://drive.google.com/file/d/1Cnd8QrmoycgOlDaNc3LScF0r7lV7L7m3/view?usp=sharing", // Link PDF Panduan e-Rapor
+        linkPanduanNilai: "https://drive.google.com/file/d/1ivTYccxjtmc_M8zGllISpeTbQfOIdrQW/view?usp=sharing", // Link PDF Panduan Penilaian
+        announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!", // Pengumuman berjalan
+        whatsapp: "6285223344556", // Nomor WA Anda (Format kode negara: 628xxx)
+        pin: "1234", // PIN Pengaman untuk masuk Panel Mode Uji
+        lastUpdated: "Baru Saja" // Waktu pembaharuan terakhir
       };
 
-      // Initialize from localstorage or use defaults
-      let appConfigs = JSON.parse(localStorage.getItem("era_configs")) || DEFAULT_CONFIGS;
-      function safeUrl(url) {
-        if (!url || url.trim() === "" || url === "#") {
-          return "#";
-        }
+      // KINI MENGGUNAKAN STATE DI MEMORI (SINKRON SEPENUHNYA DARI CODE GITHUB!)
+      // Seluruh pemuatan dan penyimpanan localStorage telah dihapus total.
+      let appConfigs = { ...DEFAULT_CONFIGS };
 
-        return url;
-      }
       // Render Configuration to UI
       function applyConfigurations() {
         // 1. Update Link
@@ -535,9 +539,8 @@
         document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
 
         // 5. Update PDF Manual Links
-        document.getElementById("link-panduan-rapor").href = safeUrl(appConfigs.linkPanduanRapor);
-
-        document.getElementById("link-panduan-nilai").href = safeUrl(appConfigs.linkPanduanNilai);
+        document.getElementById("link-panduan-rapor").href = formatDriveUrl(appConfigs.linkPanduanRapor);
+        document.getElementById("link-panduan-nilai").href = formatDriveUrl(appConfigs.linkPanduanNilai);
 
         // 6. Update Embedded Media Elements
         const videoPlayerIframe = document.getElementById("video-player-iframe");
@@ -550,7 +553,7 @@
         if (appConfigs.videoUrl && appConfigs.videoUrl.trim() !== "") {
           const vUrl = appConfigs.videoUrl.trim();
           videoPlaceholder.classList.add("hidden");
-
+          
           // Check if it is a relative path (doesn't start with http/https) -> local GitHub file
           if (!vUrl.startsWith("http://") && !vUrl.startsWith("https://")) {
             videoPlayerLocal.src = vUrl;
@@ -576,7 +579,7 @@
         if (appConfigs.audioUrl && appConfigs.audioUrl.trim() !== "") {
           const aUrl = appConfigs.audioUrl.trim();
           textAudioFilename.innerText = "File: " + aUrl;
-
+          
           // Check if it is a relative path (local file on GitHub)
           if (!aUrl.startsWith("http://") && !aUrl.startsWith("https://")) {
             audioPlayer.src = aUrl;
@@ -669,63 +672,36 @@
         document.getElementById("auth-panel").classList.remove("hidden");
         document.getElementById("config-panel").classList.add("hidden");
         document.getElementById("pin-input").value = "";
-        showToast("Berhasil Keluar Panel Operator", true);
+        showToast("Keluar dari Mode Uji", true);
       }
 
+      // MENYIMPAN HANYA KE LOCAL MEMORY SEBAGAI PREVIEW SEMENTARA
       function saveConfigurations() {
-        const status = document.getElementById("cfg-status").value;
-        const linkMerdeka = document.getElementById("cfg-link-merdeka").value;
-        const lokasi = document.getElementById("cfg-lokasi").value;
-        const videoUrl = document.getElementById("cfg-video-url").value;
-        const audioUrl = document.getElementById("cfg-audio-url").value;
-        const linkPanduanRapor = document.getElementById("cfg-panduan-rapor").value;
-        const linkPanduanNilai = document.getElementById("cfg-panduan-nilai").value;
-        const announcement = document.getElementById("cfg-announcement").value;
-        const whatsapp = document.getElementById("cfg-whatsapp").value;
-        const newPin = document.getElementById("cfg-new-pin").value;
+        appConfigs.status = document.getElementById("cfg-status").value;
+        appConfigs.linkMerdeka = document.getElementById("cfg-link-merdeka").value;
+        appConfigs.lokasi = document.getElementById("cfg-lokasi").value;
+        appConfigs.videoUrl = document.getElementById("cfg-video-url").value;
+        appConfigs.audioUrl = document.getElementById("cfg-audio-url").value;
+        appConfigs.linkPanduanRapor = document.getElementById("cfg-panduan-rapor").value;
+        appConfigs.linkPanduanNilai = document.getElementById("cfg-panduan-nilai").value;
+        appConfigs.announcement = document.getElementById("cfg-announcement").value;
+        appConfigs.whatsapp = document.getElementById("cfg-whatsapp").value;
 
-        appConfigs.status = status;
-        appConfigs.linkMerdeka = linkMerdeka;
-        appConfigs.lokasi = lokasi;
-        appConfigs.videoUrl = videoUrl;
-        appConfigs.audioUrl = audioUrl;
-        appConfigs.linkPanduanRapor = linkPanduanRapor;
-        appConfigs.linkPanduanNilai = linkPanduanNilai;
-        appConfigs.announcement = announcement;
-        appConfigs.whatsapp = whatsapp;
-
-        if (newPin && newPin.trim().length > 0) {
-          appConfigs.pin = newPin.trim();
-        }
-
-        // Update Time
+        // Update Time untuk Pratinjau
         const now = new Date();
-        appConfigs.lastUpdated = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB";
+        appConfigs.lastUpdated = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB (Preview)";
 
-        // Save to localStorage
-        localStorage.setItem("era_configs", JSON.stringify(appConfigs));
-        console.log("CONFIG TERSIMPAN:", appConfigs);
-
-        // Apply modifications to page
+        // Apply ke halaman web Anda saat ini
         applyConfigurations();
 
-        // Close dialog
+        // Tutup dialog
         closeAdminModal();
-        showToast("Konfigurasi Operator Berhasil Disimpan!", true);
+        showToast("Tampilan berhasil diperbarui dalam mode uji!", true);
       }
-      console.log("MENYIMPAN CONFIG...");
 
-      // Initialize page state
+      // Initialize page state on load
       window.onload = function () {
-        localStorage.clear();
-        // RESET CONFIG JIKA DIPERLUKAN
-        // HAPUS // DI BAWAH INI JIKA MAU RESET TOTAL
-
-        // localStorage.clear();
-
         applyConfigurations();
-
-        console.log("CONFIG AKTIF:", appConfigs);
       };
     </script>
   </body>
