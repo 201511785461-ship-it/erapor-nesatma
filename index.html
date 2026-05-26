@@ -104,6 +104,75 @@
           </div>
         </div>
 
+        <!-- NEW: EMBEDDED INTERACTIVE MEDIA PLAYER SECTION -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
+          <div class="border-b border-slate-100 pb-4">
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-play-css text-blue-600"></i>
+              <i class="fa-solid fa-photo-film text-blue-500"></i>
+              Ruang Panduan Multimedia (Langsung Putar di HP)
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">Tonton video panduan atau dengarkan rekaman instruksi dari Operator Dapodik tanpa keluar dari aplikasi.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Video Player Widget -->
+            <div class="space-y-3">
+              <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-video text-rose-500"></i>
+                Video Panduan Operator
+              </h4>
+              <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner border border-slate-100 flex items-center justify-center">
+                <iframe 
+                  id="video-player" 
+                  src="" 
+                  class="absolute inset-0 w-full h-full border-0 hidden" 
+                  allow="autoplay; encrypted-media" 
+                  allowfullscreen>
+                </iframe>
+                <!-- Placeholder Video if link is empty -->
+                <div id="video-placeholder" class="text-center p-4 space-y-2 z-10">
+                  <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto text-lg">
+                    <i class="fa-solid fa-film"></i>
+                  </div>
+                  <p class="text-xs font-semibold text-slate-400">Video belum diunggah oleh Operator</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Audio Player Widget -->
+            <div class="space-y-3 flex flex-col justify-between">
+              <div class="space-y-3">
+                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                  <i class="fa-solid fa-volume-high text-emerald-500"></i>
+                  Instruksi Suara (Audio)
+                </h4>
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shadow-sm">
+                      <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs font-bold text-slate-800">Penjelasan & Diskusi e-Rapor</p>
+                      <p class="text-[10px] text-slate-400">Format Rekaman Diskusi/Suara Instan</p>
+                    </div>
+                  </div>
+                  <!-- Native HTML5 Audio Player style with Tailwind -->
+                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">
+                    Browser Anda tidak mendukung pemutar audio ini.
+                  </audio>
+                </div>
+              </div>
+
+              <!-- Location Info & Help Box -->
+              <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 space-y-1">
+                <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Tips Pemutaran HP</p>
+                <p class="text-[11px] text-indigo-950/80 leading-relaxed">Jika video tidak muncul, pastikan Anda sudah login akun Google Anda di browser HP, atau klik tombol titik tiga di pojok kanan atas WA lalu pilih <strong>Buka di Chrome</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- GUIDELINES SECTION -->
         <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
           <h3 class="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
@@ -283,24 +352,36 @@
               <input type="text" id="cfg-lokasi" placeholder="Contoh: Ruang Lab OmTa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
 
+            <!-- Video Player URL -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Video Panduan (Google Drive/YouTube)</label>
+              <input type="url" id="cfg-video-url" placeholder="Sematkan link video untuk diputar langsung di HP" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- Audio Player URL -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio Panduan (MP3/Drive Audio)</label>
+              <input type="url" id="cfg-audio-url" placeholder="Sematkan link file audio MP3/WAV" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
             <!-- PDF Panduan Rapor URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF / Video Panduan e-Rapor</label>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan e-Rapor</label>
               <input
                 type="url"
                 id="cfg-panduan-rapor"
-                placeholder="Tempel link PDF atau Google Drive Video"
+                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
             <!-- PDF Panduan Pembelajaran URL -->
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF / Video Panduan Penilaian</label>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link PDF Panduan Penilaian</label>
               <input
                 type="url"
                 id="cfg-panduan-nilai"
-                placeholder="Tempel link PDF atau Google Drive Video"
+                placeholder="Tempel link PDF (Google Drive/Situs resmi)"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
@@ -343,14 +424,39 @@
     <script>
       // Helper function to sanitize Google Drive URLs for Android Direct-Play compatibility
       function formatDriveUrl(url) {
-        if (!url) return "#";
+        if (!url) return "";
         
-        // If it is a google drive file sharing link, convert it to secure iframe play link
+        // Convert google drive file sharing link to secure embed preview link
         if (url.includes("drive.google.com") && url.includes("/file/d/")) {
           let parts = url.split("/file/d/");
           if (parts.length > 1) {
             let fileId = parts[1].split("/")[0];
             return `https://drive.google.com/file/d/${fileId}/preview`;
+          }
+        }
+        
+        // Convert YouTube watch link to embed link
+        if (url.includes("youtube.com/watch?v=")) {
+          let videoId = url.split("v=")[1]?.split("&")[0];
+          if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+        }
+        if (url.includes("youtu.be/")) {
+          let videoId = url.split("youtu.be/")[1]?.split("?")[0];
+          if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        return url;
+      }
+
+      // Helper function for Direct Audio URL formatting (Google Drive raw player conversion)
+      function formatAudioUrl(url) {
+        if (!url) return "";
+        if (url.includes("drive.google.com") && url.includes("/file/d/")) {
+          let parts = url.split("/file/d/");
+          if (parts.length > 1) {
+            let fileId = parts[1].split("/")[0];
+            // Uses google drive direct stream link for HTML5 audio
+            return `https://docs.google.com/uc?export=open&id=${fileId}`;
           }
         }
         return url;
@@ -361,7 +467,8 @@
         status: "online",
         linkMerdeka: "https://smpn1manonjaya-merdeka.ngrok-free.app",
         lokasi: "Ruang Lab OmTa",
-        // Menggunakan link pendek s.id resmi yang dijamin ringan dan lancar di semua HP tanpa gangguan DNS
+        videoUrl: "https://drive.google.com/file/d/1xRfNVpHO18KhsKU1Jd5ZvpGHsQW4Dlx6/view?usp=sharing", // Tautkan video asli kamu di sini
+        audioUrl: "", // Tempel tautan rekaman suara kamu berformat MP3 di sini
         linkPanduanRapor: "https://s.id/panduan-erapor-smp",
         linkPanduanNilai: "https://s.id/panduan-pembelajaran-asesmen",
         announcement: "Pengisian e-Rapor Kurikulum Merdeka sedang berlangsung. Harap perhatikan tenggat waktu!",
@@ -419,11 +526,32 @@
         document.getElementById("btn-whatsapp").href = `https://wa.me/${appConfigs.whatsapp}`;
         document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
 
-        // 5. Update PDF Manual Links (Automated Android compatible conversion)
-        document.getElementById("link-panduan-rapor").href = formatDriveUrl(appConfigs.linkPanduanRapor);
-        document.getElementById("link-panduan-nilai").href = formatDriveUrl(appConfigs.linkPanduanNilai);
+        // 5. Update PDF Manual Links
+        document.getElementById("link-panduan-rapor").href = appConfigs.linkPanduanRapor;
+        document.getElementById("link-panduan-nilai").href = appConfigs.linkPanduanNilai;
 
-        // 6. Update Time Info
+        // 6. Update Embedded Media Elements
+        const videoPlayer = document.getElementById("video-player");
+        const videoPlaceholder = document.getElementById("video-placeholder");
+        const audioPlayer = document.getElementById("audio-player");
+
+        if (appConfigs.videoUrl && appConfigs.videoUrl.trim() !== "") {
+          videoPlayer.src = formatDriveUrl(appConfigs.videoUrl);
+          videoPlayer.classList.remove("hidden");
+          videoPlaceholder.classList.add("hidden");
+        } else {
+          videoPlayer.src = "";
+          videoPlayer.classList.add("hidden");
+          videoPlaceholder.classList.remove("hidden");
+        }
+
+        if (appConfigs.audioUrl && appConfigs.audioUrl.trim() !== "") {
+          audioPlayer.src = formatAudioUrl(appConfigs.audioUrl);
+        } else {
+          audioPlayer.src = "";
+        }
+
+        // 7. Update Time Info
         document.getElementById("last-updated").innerText = `Update terakhir oleh Operator: ${appConfigs.lastUpdated}`;
       }
 
@@ -464,6 +592,8 @@
         document.getElementById("cfg-status").value = appConfigs.status;
         document.getElementById("cfg-link-merdeka").value = appConfigs.linkMerdeka;
         document.getElementById("cfg-lokasi").value = appConfigs.lokasi || "Ruang Lab OmTa";
+        document.getElementById("cfg-video-url").value = appConfigs.videoUrl || "";
+        document.getElementById("cfg-audio-url").value = appConfigs.audioUrl || "";
         document.getElementById("cfg-panduan-rapor").value = appConfigs.linkPanduanRapor || "";
         document.getElementById("cfg-panduan-nilai").value = appConfigs.linkPanduanNilai || "";
         document.getElementById("cfg-announcement").value = appConfigs.announcement;
@@ -509,6 +639,8 @@
         const status = document.getElementById("cfg-status").value;
         const linkMerdeka = document.getElementById("cfg-link-merdeka").value;
         const lokasi = document.getElementById("cfg-lokasi").value;
+        const videoUrl = document.getElementById("cfg-video-url").value;
+        const audioUrl = document.getElementById("cfg-audio-url").value;
         const linkPanduanRapor = document.getElementById("cfg-panduan-rapor").value;
         const linkPanduanNilai = document.getElementById("cfg-panduan-nilai").value;
         const announcement = document.getElementById("cfg-announcement").value;
@@ -518,6 +650,8 @@
         appConfigs.status = status;
         appConfigs.linkMerdeka = linkMerdeka;
         appConfigs.lokasi = lokasi;
+        appConfigs.videoUrl = videoUrl;
+        appConfigs.audioUrl = audioUrl;
         appConfigs.linkPanduanRapor = linkPanduanRapor;
         appConfigs.linkPanduanNilai = linkPanduanNilai;
         appConfigs.announcement = announcement;
