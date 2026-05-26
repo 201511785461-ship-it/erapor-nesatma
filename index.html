@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -123,20 +123,9 @@
               </h4>
               <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner border border-slate-100 flex items-center justify-center">
                 <!-- Iframe Player for Google Drive / YouTube -->
-                <iframe 
-                  id="video-player-iframe" 
-                  src="" 
-                  class="absolute inset-0 w-full h-full border-0 hidden" 
-                  allow="autoplay; encrypted-media" 
-                  allowfullscreen>
-                </iframe>
+                <iframe id="video-player-iframe" src="" class="absolute inset-0 w-full h-full border-0 hidden" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
                 <!-- Native Video Player for Local GitHub Files -->
-                <video 
-                  id="video-player-local" 
-                  src="" 
-                  controls 
-                  class="absolute inset-0 w-full h-full border-0 hidden bg-black">
-                </video>
+                <video id="video-player-local" src="" controls class="absolute inset-0 w-full h-full border-0 hidden bg-black"></video>
                 <!-- Placeholder Video if link is empty -->
                 <div id="video-placeholder" class="text-center p-4 space-y-2 z-10">
                   <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto text-lg">
@@ -165,9 +154,7 @@
                     </div>
                   </div>
                   <!-- Native HTML5 Audio Player style with Tailwind -->
-                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">
-                    Browser Anda tidak mendukung pemutar audio ini.
-                  </audio>
+                  <audio id="audio-player" class="w-full h-10 rounded-lg outline-none bg-white border border-slate-200" controls src="">Browser Anda tidak mendukung pemutar audio ini.</audio>
                 </div>
               </div>
 
@@ -175,7 +162,8 @@
               <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 space-y-1">
                 <p class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider">💡 Panduan Unggah Media</p>
                 <p class="text-[11px] text-indigo-950/80 leading-relaxed">
-                  Ketikkan nama file persis yang ada di GitHub kamu (misalnya: <code class="bg-indigo-100 px-1 py-0.5 rounded font-mono font-semibold">E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a</code>) ke dalam kolom input di Panel Operator.
+                  Ketikkan nama file persis yang ada di GitHub kamu (misalnya: <code class="bg-indigo-100 px-1 py-0.5 rounded font-mono font-semibold">E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a</code>) ke dalam kolom input di Panel
+                  Operator.
                 </p>
               </div>
             </div>
@@ -271,7 +259,7 @@
             </a>
             <a
               id="link-panduan-nilai"
-              href="https://drive.google.com/file/d/1ivTYccxjtmc_M8zGIIISpeTbQRNV3zMx"
+              href="#"
               target="_blank"
               class="flex items-center justify-between p-3 bg-white rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-sm transition-all text-xs text-slate-700 font-medium group"
             >
@@ -370,7 +358,12 @@
             <!-- Audio Player URL -->
             <div>
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Link Audio / Nama File Audio GitHub</label>
-              <input type="text" id="cfg-audio-url" placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input
+                type="text"
+                id="cfg-audio-url"
+                placeholder="Contoh: E-Rapor_Dan_Risiko_Mekanisasi_Penilaian_Guru.m4a"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+              />
             </div>
 
             <!-- PDF Panduan Rapor URL -->
@@ -434,7 +427,7 @@
       // Helper function to sanitize Google Drive URLs for Android Direct-Play compatibility
       function formatDriveUrl(url) {
         if (!url) return "";
-        
+
         // Convert google drive file sharing link to secure embed preview link
         if (url.includes("drive.google.com") && url.includes("/file/d/")) {
           let parts = url.split("/file/d/");
@@ -443,7 +436,7 @@
             return `https://drive.google.com/file/d/${fileId}/preview`;
           }
         }
-        
+
         // Convert YouTube watch link to embed link
         if (url.includes("youtube.com/watch?v=")) {
           let videoId = url.split("v=")[1]?.split("&")[0];
@@ -488,7 +481,13 @@
 
       // Initialize from localstorage or use defaults
       let appConfigs = JSON.parse(localStorage.getItem("era_configs")) || DEFAULT_CONFIGS;
+      function safeUrl(url) {
+        if (!url || url.trim() === "" || url === "#") {
+          return "#";
+        }
 
+        return url;
+      }
       // Render Configuration to UI
       function applyConfigurations() {
         // 1. Update Link
@@ -536,8 +535,9 @@
         document.getElementById("text-lokasi-offline").innerText = appConfigs.lokasi || "Ruang Lab OmTa";
 
         // 5. Update PDF Manual Links
-        document.getElementById("link-panduan-rapor").href = appConfigs.linkPanduanRapor;
-        document.getElementById("link-panduan-nilai").href = appConfigs.linkPanduanNilai;
+        document.getElementById("link-panduan-rapor").href = safeUrl(appConfigs.linkPanduanRapor);
+
+        document.getElementById("link-panduan-nilai").href = safeUrl(appConfigs.linkPanduanNilai);
 
         // 6. Update Embedded Media Elements
         const videoPlayerIframe = document.getElementById("video-player-iframe");
@@ -550,7 +550,7 @@
         if (appConfigs.videoUrl && appConfigs.videoUrl.trim() !== "") {
           const vUrl = appConfigs.videoUrl.trim();
           videoPlaceholder.classList.add("hidden");
-          
+
           // Check if it is a relative path (doesn't start with http/https) -> local GitHub file
           if (!vUrl.startsWith("http://") && !vUrl.startsWith("https://")) {
             videoPlayerLocal.src = vUrl;
@@ -576,7 +576,7 @@
         if (appConfigs.audioUrl && appConfigs.audioUrl.trim() !== "") {
           const aUrl = appConfigs.audioUrl.trim();
           textAudioFilename.innerText = "File: " + aUrl;
-          
+
           // Check if it is a relative path (local file on GitHub)
           if (!aUrl.startsWith("http://") && !aUrl.startsWith("https://")) {
             audioPlayer.src = aUrl;
@@ -704,6 +704,7 @@
 
         // Save to localStorage
         localStorage.setItem("era_configs", JSON.stringify(appConfigs));
+        console.log("CONFIG TERSIMPAN:", appConfigs);
 
         // Apply modifications to page
         applyConfigurations();
@@ -712,10 +713,19 @@
         closeAdminModal();
         showToast("Konfigurasi Operator Berhasil Disimpan!", true);
       }
+      console.log("MENYIMPAN CONFIG...");
 
       // Initialize page state
       window.onload = function () {
+        localStorage.clear();
+        // RESET CONFIG JIKA DIPERLUKAN
+        // HAPUS // DI BAWAH INI JIKA MAU RESET TOTAL
+
+        // localStorage.clear();
+
         applyConfigurations();
+
+        console.log("CONFIG AKTIF:", appConfigs);
       };
     </script>
   </body>
